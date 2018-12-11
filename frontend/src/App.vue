@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-app>
   <Navbar />
-  </div>
+  </v-app>
 </template>
 
 
@@ -18,5 +18,7 @@ export default {
 </script>
 
 <style>
-
+  * {
+    font-family: 'Helvetica', sans-serif;
+  }
 </style>
