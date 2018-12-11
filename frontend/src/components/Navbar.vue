@@ -8,17 +8,29 @@
         <v-btn flat>Link One</v-btn>
         <v-btn flat>Link Two</v-btn>
 
-        <div id="connection-check">
-          <div class="text-xs-center" v-if="web3Account && web3Enabled">
+        <div id="connection-check" v-if="network">
+          <div class="text-xs-center" v-if="web3Account && web3Enabled && network === 'rinkeby'">
             <v-chip>
               <v-avatar class="green">R</v-avatar>
               Welcome!
             </v-chip>
           </div>
+          <div class="text-xs-center" v-else-if="web3Account && web3Enabled && network !== 'rinkeby'">
+            <v-chip>
+              <v-avatar class="orange">{{ network[0].toUpperCase() }}</v-avatar>
+              Switch Networks
+            </v-chip>
+          </div>
+          <div class="text-xs-center" v-else-if="web3Enabled">
+            <v-chip>
+              <v-avatar class="yellow">{{ network[0].toUpperCase() }}</v-avatar>
+              Log in to Metamask
+            </v-chip>
+          </div>
           <div class="text-xs-center" v-else>
             <v-chip close>
               <v-avatar class="red">!</v-avatar>
-              Error!
+              Metamask Error
             </v-chip>
           </div>
         </div>
@@ -67,6 +79,9 @@ export default {
     },
     web3Enabled() {
       return this.$store.state.web3 !== null;
+    }, 
+    network() {
+      return this.$store.state.network || null;
     }
   }
 }

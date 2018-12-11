@@ -3,7 +3,7 @@
 let state = {
   web3: null,
   user: null,
-  contractInstance: null
+  network: null,
 };
 
 export default state;
