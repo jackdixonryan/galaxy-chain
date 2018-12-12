@@ -63,7 +63,7 @@
                     <v-text-field v-model="user.name" type="text" placeholder="Name" solo></v-text-field>
                     <v-text-field v-model="user.age" type="number" placeholder="Age" solo></v-text-field>
                     <v-text-field v-model="user.email" type="email" placeholder="Email (Optional)" solo></v-text-field>
-                    <v-btn flat color="white">Sign Up</v-btn>
+                    <v-btn flat color="white" @click="onSubmit">Sign Up</v-btn>
                   </v-card-title>
                 </v-card>
 
@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import db from "../../fb/db";
+
 export default {
   data() {
     return {
@@ -84,23 +86,37 @@ export default {
         name: "",
         age: null,
         email: "",
+        // we're just going to bungle this in to enable the walkthrough.
+        newUser: true
       }
     }
   },
   methods: {
+    // allows a user to interact with the submenus and mount different cards.
     mountComponent(val) {
       this.mountedComponent = val;
-    } 
+    },
+
+   // Takes user input, does minor validation, then creates a new user with firebase. 
+    onSubmit() {
+      const emailValid = this.validateEmail(this.user.email);
+      if (emailValid && this.user.name && this.user.age) { 
+        db.collection("registered")
+          .doc(this.$store.state.user)
+          .set(this.user);
+       }
+    },
+
+    // regex expression to validate email
+    validateEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
   }
 }
 </script>
 
-<style>
-  .application--wrap {
-    background-image: url("https://d2ujflorbtfzji.cloudfront.net/key-image/a09c689a-a318-458a-bd2e-47a72ba97366.jpg");
-    background-size: cover;
-  }
-
+<style scoped>
   .layout {
     margin-top: 2em;
   }

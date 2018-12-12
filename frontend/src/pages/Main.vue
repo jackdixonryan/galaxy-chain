@@ -21,9 +21,7 @@ export default {
   },
   data() {
     return {
-      registered: false,
-      userInformation: null,
-      userFirebaseAddress: null,
+      registered: false
     }
   },
   computed: {
@@ -33,22 +31,22 @@ export default {
     // if we get a value from vuex for a user, we're going to check if the user's hash is registered on the site. 
   },
   watch: {
+    // refactored this a touch: ids in the ubase are hashes now. so we just have to check if val exists to flip our bool. 
     user: function(val) {
       fb.collection("registered")
-        .where("hash", "==", val)
+        .doc(val)
         .get()
         .then(result => {
-          if (result.docs.length === 1) {
-            this.registered = true;
-            this.setUser(result.docs[0].id);
-          }
+          this.registered = result.exists;
         })
+        .catch(err => {
+          console.log();
+        });
     }
   },
   methods: {
     // takes a user hash to retrieve firestore data.
     setUser(userHash) {
-      this.userFirebaseAddress = userHash;
       fb.collection("registered")
         .doc(userHash)
         .get()
