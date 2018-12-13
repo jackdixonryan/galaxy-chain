@@ -62,15 +62,15 @@
         <v-card>
           <v-card-text v-if="userData">
             <h1>Welcome, {{ userData.name }}
-              <div 
+              <a 
+                href="/ether"
                 id="eth-balance"
                 class="animated infinite pulse"
-                @click="getEtherDialog = true"
               >
                 <i class="fab fa-ethereum blue--text"></i>
                 <span id="balance" class="blue--text">{{ balance }}
                 </span>
-              </div>
+              </a>
             </h1>
           </v-card-text>
         </v-card>

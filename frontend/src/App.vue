@@ -22,4 +22,8 @@ export default {
   * {
     font-family: 'Helvetica', sans-serif;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
 </style>
