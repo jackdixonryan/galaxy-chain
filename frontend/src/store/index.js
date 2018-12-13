@@ -20,6 +20,9 @@ export const store = new Vuex.Store({
         
         const network = await state.web3.eth.net.getNetworkType();
         state.network = network;
+
+        const balance = await state.web3.eth.getBalance(state.user);
+        state.balance = balance;
       }
     },
   },

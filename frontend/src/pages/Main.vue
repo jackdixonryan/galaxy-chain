@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Dashboard v-if="user && registered"/>
+    <Dashboard v-if="user && registered" :userhash="user"/>
     <Register v-else-if="user && !registered"/>
     <Error v-else />
   </div>

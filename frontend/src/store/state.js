@@ -4,6 +4,7 @@ let state = {
   web3: null,
   user: null,
   network: null,
+  balance: null
 };
 
 export default state;
