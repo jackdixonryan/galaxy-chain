@@ -21,12 +21,20 @@
     <v-layout row wrap>
       <v-flex xs8 offset-xs2 id="ether-info">
         <v-parallax src="https://i.imgur.com/gQp3VSW.jpg" id="parallax-img" height="400"></v-parallax>
-        <h1 class="display-1 white--text section-title">What is Ether?</h1>
-        <p class="white--text justified">Ether is a distributed ledger system that creates secure, distributed, immutable smart contracts. For you, this means that all of your transactions are safe and verified by a wide network of machines.</p>
+        <h1 
+          class="display-1 section-title" 
+          :class="{ 'animated fadeIn white--text' : (scroll >= 771) }"
+        >What is Ether?</h1>
+        <p 
+          class="justified" 
+          :class="{ 'animated fadeIn white--text delay-1s' : (scroll >= 771) }"
+        >
+          Ether is a distributed ledger system that creates secure, distributed, immutable smart contracts. For you, this means that all of your transactions are safe and verified by a wide network of machines.</p>
         <v-timeline dense>
           <v-timeline-item color="green">
             <span slot="opposite"></span>
-            <v-card class="elevation-2">
+            <v-card class="elevation-2 hidden" 
+              :class="{'animated rotateIn visible' : scroll >= 1280 }">
               <v-card-title class="headline centered">Pay</v-card-title>
               <v-card-text class="justified">
                 When you place a transaction on the ethereum network, your balance will be evaluated to see if you have sufficient ether to complete the request.
@@ -35,7 +43,7 @@
           </v-timeline-item>
           <v-timeline-item color="green">
             <span class="opposite"></span>
-            <v-card class="elevation-2">
+            <v-card class="elevation-2 hidden" :class="{'animated rotateIn visible delay-1s' : scroll >= 1280 }">
               <v-card-title class="headline centered">Pend</v-card-title>
               <v-card-text class="justified">
                 You will notice that all of your transactions take a moment to register. The Ethereum network requires validation when writing data.
@@ -44,7 +52,7 @@
           </v-timeline-item>
           <v-timeline-item color="green">
             <span class="opposite"></span>
-            <v-card class="elevation-2">
+            <v-card class="elevation-2 hidden" :class="{'animated rotateIn visible delay-2s' : scroll >= 1280 }">
               <v-card-title class="headline centered">Post</v-card-title>
               <v-card-text class="justified">
                 You will shortly receive a message telling you that your transaction was successfully posted. The reason for the delay is that your transaction has to be added to the ethereum blockchain, a process called mining. 
@@ -122,8 +130,20 @@ export default {
   data() {
     return {
       view: null,
-      offsetTop: 0
+      scroll: 0,
     }
+  },
+  methods: {
+    handleScroll() {
+      // max scroll is most important. We don't need to know where we are but how far we've been. This will permit animations to fire once when an event happens without disappearing after it's done. 
+      if (window.scrollY >= this.scroll) this.scroll = window.scrollY;
+    }
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 </script>
@@ -158,6 +178,14 @@ export default {
 
   .rky-link {
     text-decoration: none;
+  }
+
+  .visible {
+    visibility: visible !important;
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 
 </style>
