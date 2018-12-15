@@ -111,7 +111,7 @@
             </v-card>
           </v-timeline-item>
           <v-timeline-item color="green">
-            <v-card class="elevation-2 hidden" :class="{ 'animated fadeIn visible' : (scroll >= 4050) }">
+            <v-card class="elevation-2 hidden" :class="{ 'animated fadeIn visible' : (scroll >= 3900) }">
               <v-card-title class="headline">Wait</v-card-title>
               <v-card-text class="justified">
                 As stated above, everything ethereum takes a bit of time. It will take a bit of time for ethereum wallet to show your balance as being updated. As soon as it is, however, you're ready to jump in and start playing! 

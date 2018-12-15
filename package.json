@@ -1,0 +1,19 @@
+{
+  "name": "galaxy-chain",
+  "version": "1.0.0",
+  "description": "Vue-based, ethereum-powered.",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd frontend && npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackdixonryan/galaxy-chain.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackdixonryan/galaxy-chain/issues"
+  },
+  "homepage": "https://github.com/jackdixonryan/galaxy-chain#readme"
+}
