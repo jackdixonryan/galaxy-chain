@@ -62,15 +62,15 @@
         <v-card>
           <v-card-text v-if="userData">
             <h1>Welcome, {{ userData.name }}
-              <a 
-                href="/ether"
+              <router-link 
+                to="/ether"
                 id="eth-balance"
                 class="animated infinite pulse"
               >
                 <i class="fab fa-ethereum blue--text"></i>
                 <span id="balance" class="blue--text">{{ balance }}
                 </span>
-              </a>
+              </router-link>
             </h1>
           </v-card-text>
         </v-card>
