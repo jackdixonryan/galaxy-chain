@@ -74,17 +74,20 @@
     absolute
     temporary> 
       <v-list class="pt-0">
-        <v-list-tile
+        <router-link
           v-for="item in items"
           :key="item.title"
+          :to="item.href"
         >
-        <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile-content>
-        </v-list-tile>
+          <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+          </v-list-tile>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -98,8 +101,16 @@ export default {
       modal: false,
       drawer: null,
       items: [
-        { title: 'Home', icon: 'dashboard'},
-        { title: 'About', icon: 'question_answer'}
+        {
+          title: 'Home', 
+          icon: 'dashboard', 
+          href: '/'
+        },
+        { 
+          title: 'About', 
+          icon: 'question_answer',
+          href: '/ether'  
+        }
       ],
     }
   },

@@ -8,7 +8,7 @@
 
 <script>
 import Dashboard from "../components/main/Dashboard";
-import Error from "../components/main/Error";
+import Error from "../components/Error";
 import Register from "../components/main/Register";
 
 import fb from "../fb/db";
