@@ -49,9 +49,13 @@
       <v-flex xs12 sm4>
         <v-card>
           <v-card-title>
-            <p v-if="citizen">Citizen Of {{citizen.country}} since {{citizen.year}}</p>
-            <p v-else>You aren't in a country yet! <router-link to="/register/country">You can sign up for one here.</router-link></p>
-            <p>Once you sign up for a country affiliation, you will see a lot of information on this page. Selecting a nation opens the door to markets, trades, voting, and a lot more. Plus, you'll get access to your nation's forum page where you can communicate with your fellow citizens.</p>
+            <p v-if="!tutorial">Citizen Of {{citizen.country}} since {{citizen.year}}</p>
+            <div v-else>
+                <p>Not interested in the tutorial? No problem. Turn it off. You can reenable it from the user settings page any time.</p>
+                <v-switch label="tutorial" @click="triggerTips" v-model="tutorial"></v-switch>
+                <p>You aren't in a country yet! <router-link to="/register/country">You can sign up for one here.</router-link></p>
+                <p>Once you sign up for a country affiliation, you will see a lot of information on this page. Selecting a nation opens the door to markets, trades, voting, and a lot more. Plus, you'll get access to your nation's forum page where you can communicate with your fellow citizens.</p>
+              </div>
           </v-card-title>
         </v-card>
       </v-flex>
@@ -90,6 +94,22 @@ export default {
       userData: null,
       dialog: true,
       getEtherDialog: false,
+      citizen: {
+        country: 'Ajel',
+        year: '10.29.1029'
+      }
+    }
+  },
+  methods: {
+    triggerTips() {
+      if (this.tutorial === true) {
+        fb.collection('registered')
+          .doc(this.userhash)
+          .update({
+            newUser: false
+          })
+          .catch(err => console.log());
+      }
     }
   },
   computed: {

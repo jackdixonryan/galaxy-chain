@@ -5,6 +5,8 @@ import Router from 'vue-router';
 // page imports
 import Main from './pages/Main';
 import Ether from './pages/Ether';
+import UserSettings from './pages/UserSettings';
+import CountrySelection from './pages/CountrySelection';
 
 Vue.use(Router);
 
@@ -22,6 +24,14 @@ const router = new Router({
     {
       path: '/ether',
       component: Ether
+    },
+    {
+      path: '/countries',
+      component: CountrySelection
+    }, 
+    {
+      path: '/settings',
+      component: UserSettings
     }
   ]
 });
